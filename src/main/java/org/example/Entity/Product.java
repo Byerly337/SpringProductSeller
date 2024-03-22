@@ -12,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
+
 
 public class Product {
     @Id
@@ -20,9 +20,20 @@ public class Product {
     public long id;
     public String productName;
     public double price;
+
     @JsonIgnore
     @ManyToOne
     @JsonIgnoreProperties("products")
+    @JoinColumn(name="seller_fk")
     public Seller seller;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", seller=" + seller +
+                '}';
+    }
 }

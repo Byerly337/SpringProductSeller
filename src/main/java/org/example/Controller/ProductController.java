@@ -37,7 +37,6 @@ public class ProductController {
 
     @PostMapping("seller/{id}/product")
     public ResponseEntity<Product> addProduct(@RequestBody Product p, @PathVariable long id) throws Exception {
-        System.out.println("are we here in product?");
         Product product = productService.addProduct(id, p);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
@@ -62,11 +61,7 @@ public class ProductController {
  //           return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 //        }
 //    }
-//   @PostMapping("/product")
-//    public ResponseEntity<Product> save(@RequestBody Product p) throws ProductException {
-//        Product product = productService.addProduct(p);
-//        return new ResponseEntity<>(product, HttpStatus.CREATED);
-//    }
+
 
 
 

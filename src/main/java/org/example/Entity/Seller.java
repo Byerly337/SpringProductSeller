@@ -18,7 +18,7 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
     public String name;
-    public String seller;
+
     @OneToMany
     @JoinColumn(name = "seller_fk")
 
@@ -29,7 +29,7 @@ public class Seller {
         return "Seller{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", seller='" + seller + '\'' +
                 '}';
     }
 }
+

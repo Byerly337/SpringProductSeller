@@ -27,19 +27,6 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product saveProduct(long id, Product p) throws ProductNotFoundException {
-        Optional<Seller> optional = sellerRepository.findById(id);
-        Seller s;
-        if(optional.isEmpty()){
-            throw new ProductNotFoundException("product does not exist");
-        }else{
-            s = optional.get();
-        }
-        Product savedProduct = productRepository.save(p);
-        s.getProducts().add(savedProduct);
-        sellerRepository.save(s);
-        return savedProduct;
-    }
     public Product addProduct(long id, Product p) throws ProductException {
         Optional<Seller> optional = sellerRepository.findById(id);
         Seller s;
@@ -53,8 +40,7 @@ public class ProductService {
             throw new ProductException("Product price is less than or equal to 0");
         }
         if(optional.isEmpty()){
-          //based on method of adding product to a specific seller (instead of indicating seller in request body),
-          // this log/exception will not be thrown, but the controller BAD_REQUEST will be
+
             Main.log.warn("Seller with id " + id + " is not a listed Seller");
             throw new ProductException("Seller " + id + " is not a listed Seller");
         } else {
@@ -64,11 +50,9 @@ public class ProductService {
         Product savedProduct = productRepository.save(p);
         s.getProducts().add(savedProduct);
         sellerRepository.save(s);
-        Main.log.info("Product added: " + p.toString());
 
         return savedProduct;
     }
-
 
     public List<Product> getAllProductsByProductName(String productName) {
         return productRepository.findByProductName2(productName);
@@ -81,5 +65,19 @@ public class ProductService {
         }else{
             return p.get();
         }
+    }
+     //Ted's example code:
+    public Product saveProduct(long id, Product p) throws ProductNotFoundException {
+        Optional<Seller> optional = sellerRepository.findById(id);
+        Seller s;
+        if(optional.isEmpty()){
+            throw new ProductNotFoundException("product does not exist");
+        }else{
+            s = optional.get();
+        }
+        Product savedProduct = productRepository.save(p);
+        s.getProducts().add(savedProduct);
+        sellerRepository.save(s);
+        return savedProduct;
     }
 }
