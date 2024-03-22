@@ -15,13 +15,16 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 @Service
 public class SellerService {
     SellerRepository sellerRepository;
+
     @Autowired
-    public SellerService(SellerRepository sellerRepository){
+    public SellerService(SellerRepository sellerRepository) {
         this.sellerRepository = sellerRepository;
     }
-    public List<Seller> getAllSellers(){
+
+    public List<Seller> getAllSellers() {
         return sellerRepository.findAll();
     }
+
     public Seller saveSeller(Seller s) throws SellerException {
         Main.log.info("log, added seller");
         System.out.println("A seller was added.");
@@ -43,22 +46,4 @@ public class SellerService {
         return sellerRepository.save(s);
     }
 
-//    public boolean sellerExists (Long id){
-        // Get a list of sellers
- //       List<Seller> sellerList = sellerRepository.findAll();
-
-        // Check if the seller exists
-//        for (Seller seller : sellerList) {
-            // Check if the database seller id matches the provided seller id
-//            if (seller.findAllSellersById() == id) {
-//                return true;
-            }
-//        }
- //       return false;
- //   }
-
-
-  //      public List<Seller> getAllSellersByName (String name){
-  //          return sellerRepository.findSellerByName(name);
-  //      }
-
+}
